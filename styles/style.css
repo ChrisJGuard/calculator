@@ -1,3 +1,9 @@
+@import url("https://fonts.googleapis.com/css2?family=Open+Sans:wght@300;400&display=swap");
+
+* {
+  color: white;
+}
+
 .container {
   width: 300px;
   height: 400px;
@@ -7,14 +13,46 @@
   display: grid;
   grid-template-columns: repeat(4, 1fr);
   grid-template-rows: repeat(6, 1fr);
+  grid-gap: 1px;
+}
+
+.result {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  align-items: flex-end;
+  padding: 0 0.5em 0.25em 0;
+}
+
+.result > span {
+  font-family: "Open Sans", sans-serif;
+  font-size: 3.25rem;
+  font-weight: 300;
+}
+
+button {
+  font-family: "Open Sans", sans-serif;
+  font-size: 1.5rem;
+  font-weight: 300;
+  border: 0;
 }
 
 .result {
   grid-column: 1 / -1;
 }
 
+.modifier {
+  grid-row: 2;
+  background-color: rgb(98, 95, 102);
+}
+
 .operation {
   grid-column: 4;
+  background-color: rgb(255, 154, 0);
+}
+
+.number {
+  background-color: rgb(124, 122, 127);
 }
 
 .zero {
