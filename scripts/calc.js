@@ -28,8 +28,6 @@ function operate(operation, a, b) {
 }
 
 function appendToDisplay(value) {
-  const display = document.querySelector("span");
-
   // Prevent display overflow
   if (display.textContent.length > 9) return;
 
@@ -57,7 +55,7 @@ function addNumberListeners() {
 }
 
 function storeTempValue() {
-  tempValue = document.querySelector("span").textContent;
+  tempValue = display.textContent;
 }
 
 function storeTempOperation(operation) {
@@ -65,10 +63,12 @@ function storeTempOperation(operation) {
 }
 
 function allClear() {
-  document.querySelector("span").textContent = 0;
+  display.textContent = 0;
   tempValue = 0;
   tempOperation = "";
 }
+
+const display = document.querySelector("span");
 
 let tempValue = 0;
 let tempOperation = "";
