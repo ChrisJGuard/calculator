@@ -89,14 +89,19 @@ function addOperationListeners() {
   });
 }
 
-function addEqualsListener() {
+function addOtherListeners() {
+  // Add equals listener
   document.querySelector(".equals").addEventListener("click", calculateResult);
+
+  // Add all clear listener
+  document.querySelector(".all-clear").addEventListener("click", allClear);
 }
 
 function allClear() {
   display.textContent = 0;
   tempValue = 0;
-  tempOperation = "";
+  tempOperation = "+";
+  newNumber = true;
 }
 
 const display = document.querySelector("span");
@@ -107,4 +112,4 @@ let newNumber = true;
 
 addNumberListeners();
 addOperationListeners();
-addEqualsListener();
+addOtherListeners();
