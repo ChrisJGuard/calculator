@@ -61,6 +61,34 @@ function addNumberListeners() {
   );
 }
 
+function calculateResult() {
+  // Calculate result using temp and currently displayed values
+  let result = operate(tempOperation, tempValue, display.textContent);
+
+  // Output newly calculated result to display
+  display.textContent = result;
+
+  // Place calculated result into temp
+  tempValue = result;
+
+  // Update newNumber to prepare for further input
+  newNumber = true;
+}
+
+function addOperationListeners() {
+  const operations = document.querySelectorAll(".operation");
+
+  operations.forEach((operation) => {
+    operation.addEventListener("click", function () {
+      // Call usual result calculation function
+      calculateResult();
+
+      // Place selected operation into temp
+      tempOperation = this.innerText;
+    });
+  });
+}
+
 function allClear() {
   display.textContent = 0;
   tempValue = 0;
