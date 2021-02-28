@@ -21,7 +21,18 @@ function operate(operand, a, b) {
 function appendToDisplay(value) {
   const display = document.querySelector("span");
 
-  if (display.textContent.length > 8) return;
+  // Prevent display overflow
+  if (display.textContent.length > 9) return;
 
+  // Prevent leading zero for non-fractions
+  if (display.textContent === "0" && value !== ".") {
+    display.textContent = value;
+    return;
+  }
+
+  // Prevent multiple decimal points
+  if (display.textContent.includes(".") && value === ".") return;
+
+  // If all tests pass, update the display
   display.textContent += value;
 }
