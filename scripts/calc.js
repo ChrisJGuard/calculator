@@ -89,6 +89,10 @@ function addOperationListeners() {
   });
 }
 
+function addEqualsListener() {
+  document.querySelector(".equals").addEventListener("click", calculateResult);
+}
+
 function allClear() {
   display.textContent = 0;
   tempValue = 0;
@@ -100,3 +104,7 @@ const display = document.querySelector("span");
 let tempValue = 0;
 let tempOperation = "+";
 let newNumber = true;
+
+addNumberListeners();
+addOperationListeners();
+addEqualsListener();
