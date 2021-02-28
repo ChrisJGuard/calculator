@@ -47,8 +47,13 @@ function addNumberListeners() {
   );
 }
 
-let tempValue = 0;
-
 function storeTempValue() {
   tempValue = document.querySelector("span").textContent;
 }
+
+function storeTempOperation(operation) {
+  tempOperation = operation;
+}
+
+let tempValue = 0;
+let tempOperation = "";
