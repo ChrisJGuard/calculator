@@ -61,14 +61,6 @@ function addNumberListeners() {
   );
 }
 
-function storeTempValue() {
-  tempValue = display.textContent;
-}
-
-function storeTempOperation(operation) {
-  tempOperation = operation;
-}
-
 function allClear() {
   display.textContent = 0;
   tempValue = 0;
