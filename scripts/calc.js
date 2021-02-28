@@ -27,21 +27,28 @@ function operate(operation, a, b) {
   }
 }
 
-function appendToDisplay(value) {
+function enterDigit(digit) {
   // Prevent display overflow
   if (display.textContent.length > 9) return;
 
-  // Prevent leading zero for non-fractions
-  if (display.textContent === "0" && value !== ".") {
-    display.textContent = value;
-    return;
+  // Prevent multiple decimal points
+  if (display.textContent.includes(".") && digit === ".") return;
+
+  // Check if a new number, and create fraction or integer
+  if (newNumber) {
+    if (digit === ".") {
+      display.textContent = "0.";
+      newNumber = false;
+      return;
+    } else {
+      display.textContent = digit;
+      newNumber = false;
+      return;
+    }
   }
 
-  // Prevent multiple decimal points
-  if (display.textContent.includes(".") && value === ".") return;
-
-  // If all tests pass, update the display
-  display.textContent += value;
+  // Else, append to the display
+  display.textContent += digit;
 }
 
 function addNumberListeners() {
@@ -49,7 +56,7 @@ function addNumberListeners() {
 
   numbers.forEach((number) =>
     number.addEventListener("click", () => {
-      appendToDisplay(number.innerText);
+      enterDigit(number.innerText);
     })
   );
 }
@@ -71,4 +78,5 @@ function allClear() {
 const display = document.querySelector("span");
 
 let tempValue = 0;
-let tempOperation = "";
+let tempOperation = "+";
+let newNumber = true;
