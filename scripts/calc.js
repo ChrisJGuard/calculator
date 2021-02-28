@@ -64,5 +64,11 @@ function storeTempOperation(operation) {
   tempOperation = operation;
 }
 
+function allClear() {
+  document.querySelector("span").textContent = 0;
+  tempValue = 0;
+  tempOperation = "";
+}
+
 let tempValue = 0;
 let tempOperation = "";
