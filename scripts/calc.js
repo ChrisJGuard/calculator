@@ -15,14 +15,14 @@ function divide(a, b) {
 }
 
 function operate(operation, a, b) {
-  switch (true) {
-    case operation === "+":
+  switch (operation) {
+    case "+":
       return add(a, b);
-    case operation === "-":
+    case "-":
       return subtract(a, b);
-    case operation === "x":
+    case "x":
       return multiply(a, b);
-    case operation === "/":
+    case "/":
       return divide(a, b);
   }
 }
