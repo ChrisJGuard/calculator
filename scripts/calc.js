@@ -36,3 +36,13 @@ function appendToDisplay(value) {
   // If all tests pass, update the display
   display.textContent += value;
 }
+
+function addNumberListeners() {
+  const numbers = document.querySelectorAll(".number");
+
+  numbers.forEach((number) =>
+    number.addEventListener("click", () => {
+      appendToDisplay(number.innerText);
+    })
+  );
+}
