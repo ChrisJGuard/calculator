@@ -46,3 +46,9 @@ function addNumberListeners() {
     })
   );
 }
+
+let tempValue = 0;
+
+function storeTempValue() {
+  tempValue = document.querySelector("span").textContent;
+}
