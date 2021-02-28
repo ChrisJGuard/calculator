@@ -95,13 +95,30 @@ function addOtherListeners() {
 
   // Add all clear listener
   document.querySelector(".all-clear").addEventListener("click", allClear);
+
+  // Add plus/minus listener
+  document.querySelector(".plus-minus").addEventListener("click", plusMinus);
+
+  // Add percentage listener
+  document.querySelector(".percentage").addEventListener("click", percentage);
 }
 
 function allClear() {
+  // Update display to zero
   display.textContent = 0;
+
+  // Reset temporary variables to initial values
   tempValue = 0;
   tempOperation = "+";
   newNumber = true;
+}
+
+function plusMinus() {
+  display.textContent = multiply(display.textContent, -1);
+}
+
+function percentage() {
+  display.textContent = divide(display.textContent, 100);
 }
 
 const display = document.querySelector("span");
