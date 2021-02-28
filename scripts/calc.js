@@ -14,8 +14,17 @@ function divide(a, b) {
   return a / b;
 }
 
-function operate(operand, a, b) {
-  return operand(a, b);
+function operate(operation, a, b) {
+  switch (true) {
+    case operation === "+":
+      return add(a, b);
+    case operation === "-":
+      return subtract(a, b);
+    case operation === "x":
+      return multiply(a, b);
+    case operation === "/":
+      return divide(a, b);
+  }
 }
 
 function appendToDisplay(value) {
