@@ -39,10 +39,12 @@ function enterDigit(digit) {
     if (digit === ".") {
       display.textContent = "0.";
       newNumber = false;
+      calcComplete = false;
       return;
     } else {
       display.textContent = digit;
       newNumber = false;
+      calcComplete = false;
       return;
     }
   }
@@ -61,37 +63,58 @@ function addNumberListeners() {
   );
 }
 
-function calculateResult() {
-  // Calculate result using temp and currently displayed values
-  let result = operate(tempOperation, tempValue, display.textContent);
-
-  // Output newly calculated result to display
-  display.textContent = result;
-
-  // Place calculated result into temp
-  tempValue = result;
-
-  // Update newNumber to prepare for further input
-  newNumber = true;
-}
-
 function addOperationListeners() {
   const operations = document.querySelectorAll(".operation");
 
   operations.forEach((operation) => {
     operation.addEventListener("click", function () {
-      // Call usual result calculation function
-      calculateResult();
+      // If waiting for new number, allow multiple operator clicks
+      if (newNumber) {
+        tempOperation = this.innerText;
+        return;
+      }
 
-      // Place selected operation into temp
-      tempOperation = this.innerText;
+      // If calculation is already completed...
+      if (calcComplete) {
+        // Calculation is no longer complete!
+        calcComplete = false;
+
+        // Move calculated result and selected operation to memory
+        tempValue = display.textContent;
+        tempOperation = this.innerText;
+
+        // Prepare display for a new number input
+        newNumber = true;
+
+        return;
+      }
+
+      // If calculation is incomplete...
+      if (!calcComplete) {
+        // Calculate running result
+        const result = operate(tempOperation, tempValue, display.textContent);
+
+        // Update display with running result
+        display.textContent = result;
+
+        // Move running result and selected operation to memory
+        tempValue = result;
+        tempOperation = this.innerText;
+
+        // Prepare display for a new number input
+        newNumber = true;
+
+        return;
+      }
     });
   });
 }
 
 function addOtherListeners() {
   // Add equals listener
-  document.querySelector(".equals").addEventListener("click", calculateResult);
+  document.querySelector(".equals").addEventListener("click", () => {
+    
+  });
 
   // Add all clear listener
   document.querySelector(".all-clear").addEventListener("click", allClear);
@@ -111,6 +134,7 @@ function allClear() {
   tempValue = 0;
   tempOperation = "+";
   newNumber = true;
+  calcComplete = true;
 }
 
 function plusMinus() {
@@ -126,6 +150,7 @@ const display = document.querySelector("span");
 let tempValue = 0;
 let tempOperation = "+";
 let newNumber = true;
+let calcComplete = true;
 
 addNumberListeners();
 addOperationListeners();
