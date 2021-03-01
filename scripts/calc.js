@@ -27,9 +27,20 @@ function operate(operation, a, b) {
   }
 }
 
+function overflowHandler(num) {
+  // Convert to string for checking
+  let numString = num.toString();
+
+  // Return original if number is short enough
+  if (numString.length < 10) return num;
+
+  // Otherwise, slice and return number
+  return +numString.slice(0, 10);
+}
+
 function enterDigit(digit) {
   // Prevent display overflow
-  if (display.textContent.length > 9) return;
+  if (display.textContent.length > 9 && !newNumber) return;
 
   // Prevent multiple decimal points
   if (display.textContent.includes(".") && digit === ".") return;
@@ -92,7 +103,9 @@ function addOperationListeners() {
       // If calculation is incomplete...
       if (!calcComplete) {
         // Calculate running result
-        const result = operate(tempOperation, tempValue, display.textContent);
+        const result = overflowHandler(
+          operate(tempOperation, tempValue, display.textContent)
+        );
 
         // Update display with running result
         display.textContent = result;
@@ -114,7 +127,9 @@ function addOtherListeners() {
     // If calculation is incomplete...
     if (!calcComplete) {
       // Calculate final result
-      const result = operate(tempOperation, tempValue, display.textContent);
+      const result = overflowHandler(
+        operate(tempOperation, tempValue, display.textContent)
+      );
 
       // Store last entered value in memory
       tempValue = display.textContent;
@@ -131,10 +146,8 @@ function addOtherListeners() {
     // If calculation is already completed...
     if (calcComplete) {
       // Update display using last stored value and operation
-      display.textContent = operate(
-        tempOperation,
-        display.textContent,
-        tempValue
+      display.textContent = overflowHandler(
+        operate(tempOperation, display.textContent, tempValue)
       );
     }
   });
