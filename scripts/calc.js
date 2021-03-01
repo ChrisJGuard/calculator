@@ -45,6 +45,13 @@ function enterDigit(digit) {
   // Prevent multiple decimal points
   if (display.textContent.includes(".") && digit === ".") return;
 
+  // If previous calculation complete, reset everything before proceeding
+  if (calcComplete) {
+    tempValue = 0;
+    tempOperation = "+";
+    newNumber = true;
+  }
+
   // Check if a new number, and create fraction or integer
   if (newNumber) {
     if (digit === ".") {
