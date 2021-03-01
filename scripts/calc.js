@@ -140,9 +140,6 @@ function addOtherListeners() {
       // Declare calculation complete
       calcComplete = true;
 
-      // Prepare display for a new number input
-      newNumber = true;
-
       return;
     }
 
