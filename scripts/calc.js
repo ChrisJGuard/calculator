@@ -39,18 +39,17 @@ function overflowHandler(num) {
 }
 
 function enterDigit(digit) {
-  // Prevent display overflow
-  if (display.textContent.length > 9 && !newNumber) return;
-
-  // Prevent multiple decimal points
-  if (display.textContent.includes(".") && digit === ".") return;
-
   // If previous calculation complete, reset everything before proceeding
   if (calcComplete) {
     tempValue = 0;
     tempOperation = "+";
     newNumber = true;
   }
+  // Prevent display overflow
+  if (display.textContent.length > 9 && !newNumber) return;
+
+  // Prevent multiple decimal points
+  if (display.textContent.includes(".") && digit === ".") return;
 
   // Check if a new number, and create fraction or integer
   if (newNumber) {
