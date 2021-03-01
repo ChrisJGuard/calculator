@@ -112,8 +112,33 @@ function addOperationListeners() {
 
 function addOtherListeners() {
   // Add equals listener
-  document.querySelector(".equals").addEventListener("click", () => {
-    
+  document.querySelector(".equals").addEventListener("click", function () {
+    // If calculation is incomplete...
+    if (!calcComplete) {
+      // Calculate final result
+      const result = operate(tempOperation, tempValue, display.textContent);
+
+      // Store last entered value in memory
+      tempValue = display.textContent;
+
+      // Update display with calculated result
+      display.textContent = result;
+
+      // Declare calculation complete
+      calcComplete = true;
+
+      return;
+    }
+
+    // If calculation is already completed...
+    if (calcComplete) {
+      // Update display using last stored value and operation
+      display.textContent = operate(
+        tempOperation,
+        display.textContent,
+        tempValue
+      );
+    }
   });
 
   // Add all clear listener
