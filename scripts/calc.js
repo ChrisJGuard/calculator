@@ -103,8 +103,6 @@ function addOperationListeners() {
 
         // Prepare display for a new number input
         newNumber = true;
-
-        return;
       }
     });
   });
