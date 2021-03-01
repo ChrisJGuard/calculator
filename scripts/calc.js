@@ -66,8 +66,9 @@ function enterDigit(digit) {
     }
   }
 
-  // Else, append to the display
-  display.textContent += digit;
+  // If not new, check for leading zero, otherwise append to display
+  if (display.textContent === "0") display.textContent = digit;
+  else display.textContent += digit;
 }
 
 function addNumberListeners() {
