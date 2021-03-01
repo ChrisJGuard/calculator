@@ -49,6 +49,10 @@ button {
   border: 0;
 }
 
+button:focus {
+  outline: 1px solid white;
+}
+
 .result {
   grid-column: 1 / -1;
 }
@@ -58,14 +62,31 @@ button {
   background-color: rgb(98, 95, 102);
 }
 
+.modifier:hover,
+.modifier:focus {
+  background-color: rgb(90, 87, 94);
+}
+
 .operation,
 .equals {
   grid-column: 4;
   background-color: rgb(255, 154, 0);
 }
 
+.operation:hover,
+.operation:focus,
+.equals:hover,
+.equals:focus {
+  background-color: rgb(224, 135, 0);
+}
+
 .number {
   background-color: rgb(124, 122, 127);
+}
+
+.number:hover,
+.number:focus {
+  background-color: rgb(114, 112, 117);
 }
 
 .zero {
