@@ -181,11 +181,11 @@ function allClear() {
 }
 
 function plusMinus() {
-  display.textContent = multiply(display.textContent, -1);
+  display.textContent = overflowHandler(multiply(display.textContent, -1));
 }
 
 function percentage() {
-  display.textContent = divide(display.textContent, 100);
+  display.textContent = overflowHandler(divide(display.textContent, 100));
 }
 
 const display = document.querySelector("span");
