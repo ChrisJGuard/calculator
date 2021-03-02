@@ -114,6 +114,35 @@ function enterOperation(operation) {
   }
 }
 
+function completeCalculation() {
+  // If calculation is incomplete...
+  if (!calcComplete) {
+    // Calculate final result
+    const result = overflowHandler(
+      operate(tempOperation, tempValue, display.textContent)
+    );
+
+    // Store last entered value in memory
+    tempValue = display.textContent;
+
+    // Update display with calculated result
+    display.textContent = result;
+
+    // Declare calculation complete
+    calcComplete = true;
+
+    return;
+  }
+
+  // If calculation is already completed...
+  if (calcComplete) {
+    // Update display using last stored value and operation
+    display.textContent = overflowHandler(
+      operate(tempOperation, display.textContent, tempValue)
+    );
+  }
+}
+
 function addNumberListeners() {
   const numbers = document.querySelectorAll(".number");
 
@@ -136,34 +165,9 @@ function addOperationListeners() {
 
 function addOtherListeners() {
   // Add equals listener
-  document.querySelector(".equals").addEventListener("click", function () {
-    // If calculation is incomplete...
-    if (!calcComplete) {
-      // Calculate final result
-      const result = overflowHandler(
-        operate(tempOperation, tempValue, display.textContent)
-      );
-
-      // Store last entered value in memory
-      tempValue = display.textContent;
-
-      // Update display with calculated result
-      display.textContent = result;
-
-      // Declare calculation complete
-      calcComplete = true;
-
-      return;
-    }
-
-    // If calculation is already completed...
-    if (calcComplete) {
-      // Update display using last stored value and operation
-      display.textContent = overflowHandler(
-        operate(tempOperation, display.textContent, tempValue)
-      );
-    }
-  });
+  document
+    .querySelector(".equals")
+    .addEventListener("click", completeCalculation);
 
   // Add all clear listener
   document.querySelector(".all-clear").addEventListener("click", allClear);
