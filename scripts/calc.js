@@ -73,6 +73,47 @@ function enterDigit(digit) {
   display.textContent += digit;
 }
 
+function enterOperation(operation) {
+  // If waiting for new number, allow multiple operator clicks
+  if (newNumber) {
+    tempOperation = operation;
+    return;
+  }
+
+  // If calculation is already completed...
+  if (calcComplete) {
+    // Calculation is no longer complete!
+    calcComplete = false;
+
+    // Move calculated result and selected operation to memory
+    tempValue = display.textContent;
+    tempOperation = operation;
+
+    // Prepare display for a new number input
+    newNumber = true;
+
+    return;
+  }
+
+  // If calculation is incomplete...
+  if (!calcComplete) {
+    // Calculate running result
+    const result = overflowHandler(
+      operate(tempOperation, tempValue, display.textContent)
+    );
+
+    // Update display with running result
+    display.textContent = result;
+
+    // Move running result and selected operation to memory
+    tempValue = result;
+    tempOperation = operation;
+
+    // Prepare display for a new number input
+    newNumber = true;
+  }
+}
+
 function addNumberListeners() {
   const numbers = document.querySelectorAll(".number");
 
@@ -86,48 +127,11 @@ function addNumberListeners() {
 function addOperationListeners() {
   const operations = document.querySelectorAll(".operation");
 
-  operations.forEach((operation) => {
-    operation.addEventListener("click", function () {
-      // If waiting for new number, allow multiple operator clicks
-      if (newNumber) {
-        tempOperation = this.innerText;
-        return;
-      }
-
-      // If calculation is already completed...
-      if (calcComplete) {
-        // Calculation is no longer complete!
-        calcComplete = false;
-
-        // Move calculated result and selected operation to memory
-        tempValue = display.textContent;
-        tempOperation = this.innerText;
-
-        // Prepare display for a new number input
-        newNumber = true;
-
-        return;
-      }
-
-      // If calculation is incomplete...
-      if (!calcComplete) {
-        // Calculate running result
-        const result = overflowHandler(
-          operate(tempOperation, tempValue, display.textContent)
-        );
-
-        // Update display with running result
-        display.textContent = result;
-
-        // Move running result and selected operation to memory
-        tempValue = result;
-        tempOperation = this.innerText;
-
-        // Prepare display for a new number input
-        newNumber = true;
-      }
-    });
-  });
+  operations.forEach((operation) =>
+    operation.addEventListener("click", () => {
+      enterOperation(operation.innerText);
+    })
+  );
 }
 
 function addOtherListeners() {
