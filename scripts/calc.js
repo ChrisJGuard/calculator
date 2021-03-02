@@ -77,6 +77,7 @@ function enterOperation(operation) {
   // If waiting for new number, allow multiple operator clicks
   if (newNumber) {
     tempOperation = operation;
+    calcComplete = false;
     return;
   }
 
