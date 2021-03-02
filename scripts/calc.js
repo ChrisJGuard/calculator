@@ -143,6 +143,25 @@ function completeCalculation() {
   }
 }
 
+function allClear() {
+  // Update display to zero
+  display.textContent = 0;
+
+  // Reset temporary variables to initial values
+  tempValue = 0;
+  tempOperation = "+";
+  newNumber = true;
+  calcComplete = true;
+}
+
+function plusMinus() {
+  display.textContent = overflowHandler(multiply(display.textContent, -1));
+}
+
+function percentage() {
+  display.textContent = overflowHandler(divide(display.textContent, 100));
+}
+
 function addNumberListeners() {
   const numbers = document.querySelectorAll(".number");
 
@@ -177,25 +196,6 @@ function addOtherListeners() {
 
   // Add percentage listener
   document.querySelector(".percentage").addEventListener("click", percentage);
-}
-
-function allClear() {
-  // Update display to zero
-  display.textContent = 0;
-
-  // Reset temporary variables to initial values
-  tempValue = 0;
-  tempOperation = "+";
-  newNumber = true;
-  calcComplete = true;
-}
-
-function plusMinus() {
-  display.textContent = overflowHandler(multiply(display.textContent, -1));
-}
-
-function percentage() {
-  display.textContent = overflowHandler(divide(display.textContent, 100));
 }
 
 const display = document.querySelector("span");
