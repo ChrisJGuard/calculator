@@ -49,26 +49,28 @@ function enterDigit(digit) {
   if (display.textContent.length > 9 && !newNumber) return;
 
   // Prevent multiple decimal points
-  if (display.textContent.includes(".") && digit === ".") return;
+  if (display.textContent.includes(".") && digit === "." && !newNumber) return;
 
-  // Check if a new number, and create fraction or integer
+  // Check if a new number, and create fraction, zero, or new integer
   if (newNumber) {
-    if (digit === ".") {
-      display.textContent = "0.";
-      newNumber = false;
-      calcComplete = false;
-      return;
-    } else {
-      display.textContent = digit;
-      newNumber = false;
-      calcComplete = false;
-      return;
+    switch (digit) {
+      case ".":
+        display.textContent = "0.";
+        newNumber = false;
+        calcComplete = false;
+        return;
+      case "0":
+        display.textContent = "0";
+        return;
+      default:
+        display.textContent = digit;
+        newNumber = false;
+        calcComplete = false;
+        return;
     }
   }
-
-  // If not new, check for leading zero, otherwise append to display
-  if (display.textContent === "0") display.textContent = digit;
-  else display.textContent += digit;
+  // If not a new number, append to display
+  display.textContent += digit;
 }
 
 function addNumberListeners() {
