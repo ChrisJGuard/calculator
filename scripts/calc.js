@@ -23,7 +23,13 @@ function operate(operation, a, b) {
     case "x":
       return multiply(a, b);
     case "/":
-      return divide(a, b);
+      // Check for division by zero
+      if (b === "0") {
+        alert("Are you trying to crash me? No dividing by zero!");
+        alert("Let me reset things for you...");
+        allClear();
+        return "0";
+      } else return divide(a, b);
   }
 }
 
